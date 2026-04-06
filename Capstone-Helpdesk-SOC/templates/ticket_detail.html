@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Details - SOC & IT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Ticket #{{ ticket['id'] }} Details</h1>
+
+        <div style="text-align: left; background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <p><strong>Status:</strong> {{ ticket['status'] }}</p>
+            <p><strong>Severity:</strong> {{ ticket['severity'] }}</p>
+            <p><strong>Source:</strong> {{ ticket['source'] }}</p>
+            <p><strong>Time:</strong> {{ ticket['timestamp'] }}</p>
+            {% if ticket['employee_id'] %}
+                <p><strong>Employee ID:</strong> {{ ticket['employee_id'] }}</p>
+            {% endif %}
+
+            <hr>
+
+            <h3>Description / Raw Data:</h3>
+            <pre style="background: #eef; padding: 10px; overflow-x: auto;">{{ ticket['description'] }}</pre>
+
+            {% if ticket['source'] == 'SOC' %}
+            <hr>
+            <h3>AI Analysis</h3>
+            <p><strong>Classification:</strong> {{ ticket['ai_classification'] }}</p>
+            <p><strong>Confidence Score:</strong> {{ ticket['confidence_score'] }}%</p>
+            {% endif %}
+        </div>
+
+        <form method="POST">
+            <label for="status">Update Status:</label>
+            <select name="status" id="status">
+                <option value="Open" {% if ticket['status'] == 'Open' %}selected{% endif %}>Open</option>
+                <option value="In Progress" {% if ticket['status'] == 'In Progress' %}selected{% endif %}>In Progress</option>
+                <option value="Resolved" {% if ticket['status'] == 'Resolved' %}selected{% endif %}>Resolved</option>
+            </select>
+            <button type="submit">Save Update</button>
+        </form>
+
+        <br>
+        <p><a href="{{ url_for('staff_dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

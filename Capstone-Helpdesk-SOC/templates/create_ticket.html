@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit IT Ticket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <div class="nav"><a href="{{ url_for('employee_dashboard') }}">Back</a></div>
+    <h1>Submit IT Ticket</h1>
+    <div class="login-container" style="box-shadow: none;">
+        <form method="POST">
+            <label>Describe your issue:</label>
+            <input type="text" name="description" required placeholder="e.g., My printer is broken">
+            <button type="submit">Submit Ticket</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>>

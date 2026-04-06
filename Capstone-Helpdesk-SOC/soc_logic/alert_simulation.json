@@ -1,0 +1,22 @@
+[
+    {
+        "alert_id": "AUTH 00-00",
+        "timestamp": "2026-01-01 02:00:00",
+        "username": "alexjames",
+        "source_ip": "192.168.12.12",
+        "failed_attempts": 12,
+        "event_source": "Windows",
+        "asset_criticality": "High",
+        "privileged_account": true
+    },
+    {
+        "alert_id": "AUTH-1002", 
+        "timestamp": "2026-02-15 10:15:00", 
+        "username": "asmith", 
+        "source_ip": "192.168.1.44", 
+        "failed_attempts": 2, 
+        "event_source": "VPN", 
+        "asset_criticality": "Low", 
+        "privileged_account": false 
+    }
+]

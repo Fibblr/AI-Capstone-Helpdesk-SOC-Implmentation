@@ -1,0 +1,11 @@
+# Security
+.env
+
+# Database
+helpdesk.db
+*.sqlite3
+
+# Python Virtual Environment
+.venv/
+__pycache__/
+*.pyc

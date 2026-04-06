@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Staff Login</h1>
+
+        {% if error %}
+            <p class="error" style="color: red; text-align: center;">{{ error }}</p>
+        {% endif %}
+
+        <div class="login-container">
+            <form method="POST">
+                <label>Username</label>
+                <input type="text" name="username" required>
+
+                <label>Password</label>
+                <input type="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </div>
+        <p style="text-align:center;"><a href="{{ url_for('index') }}">Back</a></p>
+    </div>
+</body>
+</html>

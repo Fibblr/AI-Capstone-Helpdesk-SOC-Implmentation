@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IT & SOC Decision Support System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Helpdesk & SOC Decision-Support System</h1>
+        <div class="login-options">
+            <div class="portal">
+                <h2>Employee Portal</h2>
+                <p>Login to submit IT support tickets.</p>
+                <a href="{{ url_for('employee_login') }}" class="button">Employee Login</a>
+            </div>
+            <div class="portal">
+                <h2>Staff Portal</h2>
+                <p>IT & SOC Analysts login to manage unified queue.</p>
+                <a href="{{ url_for('staff_login') }}" class="button">Staff Login</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

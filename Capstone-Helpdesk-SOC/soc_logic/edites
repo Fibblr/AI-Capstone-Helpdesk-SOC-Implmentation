@@ -1,0 +1,46 @@
+staff = conn.execute("SELECT * FROM staff WHERE username = ?", (username,)).fetchone()
+if staff and staff['password'] == password:
+    
+    from werkzeug.security import generate_password_hash, check_password_hash
+
+# Storing password
+hashed_password = generate_password_hash('pass123')
+
+# Verifying password
+check_password_hash(hashed_password, 'pass123')
+
+2. Database Records
+
+You’re storing:
+
+Employee names & usernames
+Ticket descriptions (may contain sensitive SOC or IT data)
+AI classification results
+
+Recommendations:
+
+For highly sensitive ticket content (SOC alerts, security incidents), consider encrypting the description field before inserting it into the DB.
+Use AES encryption or a library like cryptography.fernet:
+    
+    from cryptography.fernet import Fernet
+
+key = Fernet.generate_key()
+cipher = Fernet(key)
+encrypted = cipher.encrypt(b"My sensitive data")
+decrypted = cipher.decrypt(encrypted)
+
+#use flask with ssl 
+from werkzeug.security import generate_password_hash, check_password_hash
+import getpass
+
+# New user: store hashed password
+password = getpass.getpass("Enter new password: ")
+hashed_password = generate_password_hash(password)
+print("Store this in DB:", hashed_password)
+
+# Login: verify entered password
+entered_password = getpass.getpass("Enter your password: ")
+if check_password_hash(hashed_password, entered_password):
+    print("Login successful")
+else:
+    print("Invalid password")

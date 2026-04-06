@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Dashboard - IT Helpdesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ name }}</h1>
+        <p>
+            <a href="{{ url_for('logout') }}">Logout</a> |
+            <strong><a href="{{ url_for('create_ticket') }}" style="color: blue;">+ Create New IT Ticket</a></strong>
+        </p>
+
+        <h2>Your IT Tickets</h2>
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
+            <tr style="background-color: #f2f2f2;">
+                <th>ID</th>
+                <th>Description</th>
+                <th>Severity</th>
+                <th>Status</th>
+            </tr>
+
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket['id'] }}</td>
+                <td>{{ ticket['description'][:50] }}...</td>
+                <td>{{ ticket['severity'] }}</td>
+                <td><strong>{{ ticket['status'] }}</strong></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center;">You have no open IT tickets.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

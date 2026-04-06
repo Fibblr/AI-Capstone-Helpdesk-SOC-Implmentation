@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Dashboard - SOC & IT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ name }}</h1>
+        <p><a href="{{ url_for('logout') }}">Logout</a></p>
+
+        <h2>Unified Ticket Queue</h2>
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%; text-align: left;">
+            <tr style="background-color: #f2f2f2;">
+                <th>ID</th>
+                <th>Source</th>
+                <th>Description</th>
+                <th>AI Classification</th>
+                <th>Severity</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for ticket in tickets %}
+            <tr>
+                <td>{{ ticket['id'] }}</td>
+                <td><strong>{{ ticket['source'] }}</strong></td>
+
+                <td>{{ ticket['description'][:50] }}...</td>
+
+                <td>{{ ticket['ai_classification'] }}</td>
+                <td>{{ ticket['severity'] }}</td>
+                <td>{{ ticket['status'] }}</td>
+                <td><a href="{{ url_for('view_ticket', ticket_id=ticket['id']) }}">Review Ticket</a></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="7" style="text-align: center;">No tickets currently in the queue.</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
