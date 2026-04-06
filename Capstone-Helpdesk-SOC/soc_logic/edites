@@ -1,4 +1,4 @@
-staff = conn.execute("SELECT * FROM staff WHERE username = ?", (username,)).fetchone()
+""" staff = conn.execute("SELECT * FROM staff WHERE username = ?", (username,)).fetchone()
 if staff and staff['password'] == password:
     
     from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,8 +10,6 @@ hashed_password = generate_password_hash('pass123')
 check_password_hash(hashed_password, 'pass123')
 
 2. Database Records
-
-You’re storing:
 
 Employee names & usernames
 Ticket descriptions (may contain sensitive SOC or IT data)
@@ -43,4 +41,4 @@ entered_password = getpass.getpass("Enter your password: ")
 if check_password_hash(hashed_password, entered_password):
     print("Login successful")
 else:
-    print("Invalid password")
+    print("Invalid password") """
