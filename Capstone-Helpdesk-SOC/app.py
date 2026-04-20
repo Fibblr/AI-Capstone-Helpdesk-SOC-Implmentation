@@ -197,11 +197,17 @@ def receive_alert():
         if AI_AVAILABLE:
             clean_data = normalize(raw_data)
             ai_response = classify_auth_alert(clean_data)
-            parsed_ai = json.loads(ai_response)
-
+            try:
+                parsed_ai = json.loads(ai_response)
+            except:
+                parsed_ai = {"classification": "Unknown", "confidence": 0} 
+            
             classification = parsed_ai.get("classification", "Unknown")
             confidence = parsed_ai.get("confidence", 0)
-            severity = map_severity(calculate_risk(clean_data, confidence))
+            
+            
+            severity = map_severity(
+                calculate_risk(clean_data, confidence))
         else:
             classification = "AI Offline"
             confidence = 0

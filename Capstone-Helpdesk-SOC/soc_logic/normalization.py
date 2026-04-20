@@ -5,14 +5,33 @@ def external_ip(ip):
 def is_afterwork(timestamp):
     hour = datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S").hour
     return hour < 8 or hour > 18 
-def normalize(alert): 
+def normalize(alert):
+    data = alert.get("data", {})
+
+    # Username fallback
+    username = (
+        data.get("user") or
+        data.get("srcuser") or
+        data.get("dstuser") or
+        "unknown"
+    )
+
+    # Safe attempts parsing
+    try:
+        attempts = int(data.get("attempts", 0))
+    except:
+        attempts = 0
+
+    # Boolean fix
+    privileged = str(data.get("privileged_account", "false")).lower() == "true"
+
     return {
-        "alert_id": alert.get("alert_id"), 
-        "username": alert.get("username"), 
-        "failed_attempts": alert.get("failed_attempts", 0), 
-        "external_ip": external_ip(alert.get("source_ip", "0.0.0.0")), 
-        "after_hours": is_afterwork(alert.get("timestamp", "1970-01-01 00:00:00")), 
-        "asset_criticality": alert.get("asset_criticality", "low"), 
-        "privileged_account": alert.get("privileged_account", False), 
-        "event_source": alert.get("event_source", "unknown")
-    } 
+        "alert_id": alert.get("id", "unknown"),
+        "username": username,
+        "failed_attempts": attempts,
+        "external_ip": external_ip(data.get("srcip", "0.0.0.0")),
+        "after_hours": is_afterwork(alert.get("timestamp", "1970-01-01 00:00:00")),
+        "asset_criticality": "high" if data.get("asset_criticality", "low").lower() == "high" else "low",
+        "privileged_account": privileged,
+        "event_source": alert.get("rule", {}).get("groups", ["unknown"])[0]
+    }

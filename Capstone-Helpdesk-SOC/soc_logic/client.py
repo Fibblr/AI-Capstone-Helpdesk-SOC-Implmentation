@@ -36,8 +36,10 @@ def classify_auth_alert(alert):
             max_tokens=150,
             temperature=0
         )
+        
+        return response.text.strip()
+    
     except Exception as e:
         ("Failed to recieve AI Feedback, Sending to manual review")
         raisederror(e)
-        
-    return '{"classification": "Unknown", "confidence": 0}'
+        return '{"classification": "Unknown", "confidence": 0}'

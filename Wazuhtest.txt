@@ -1,6 +1,6 @@
 
 
-DOWNLOAD TEST VM LINK ONEDRIVE -------> 
+DOWNLOAD TEST VM LINK GOOGLEDRIVE -------> 
 
 Windows 11 VM
     Username:CIOS 
@@ -23,7 +23,7 @@ import sys
 import json
 import requests
 
-WEBHOOK_URL = "http://127.0.0.1:8081/webhook"
+WEBHOOK_URL = "http://127.0.0.1:1514/webhook"
 
 def main():
     alert = json.loads(sys.stdin.read())
@@ -48,4 +48,4 @@ ________________________________________________________________________________
 
 5.sudo systemctl restart wazuh-manager
 
-TEST: requests.post("http://127.0.0.1:8081/webhook", json=payload)
+TEST: requests.post("http://127.0.0.1:1514/webhook", json=payload)
