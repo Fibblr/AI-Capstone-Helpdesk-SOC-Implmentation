@@ -1,0 +1,51 @@
+
+
+DOWNLOAD TEST VM LINK ONEDRIVE -------> 
+
+Windows 11 VM
+    Username:CIOS 
+    Password:P@ssw0rd
+
+Ubuntu Server (WAZUH) VM
+    Username:test 
+    Password:test
+
+*I followed the steps below, only duplicate if it is a new ubuntu vm with Wazuh unconfigured*
+
+
+1. Inside Ubuntu Server go to the directory: /var/ossec/integrations/custom-webhook
+
+2. Copy this script into a file custom-webhook.py: EX: sudo nano custom-webhook.py
+
+--------------------------------------------------------------------------------------------------------------------------------
+#!/usr/bin/env python3
+import sys
+import json
+import requests
+
+WEBHOOK_URL = "http://127.0.0.1:8081/webhook"
+
+def main():
+    alert = json.loads(sys.stdin.read())
+
+    try:
+        requests.post(WEBHOOK_URL, json=alert)
+    except Exception as e:
+        print(f"Error: {e}")
+
+main()
+______________________________________________________________________________________________________________________________
+
+3. Allow the file to be executed: chmod +x /var/ossec/integrations/custom-webhook
+
+4. Transverse to /var/ossec/etc/ossec.conf replace current config with:
+------------------------------------------------------------------------------------------
+<integration>
+  <name>custom-webhook</name>
+  <alert_format>json</alert_format>
+</integration>
+____________________________________________________________________________________________
+
+5.sudo systemctl restart wazuh-manager
+
+TEST: requests.post("http://127.0.0.1:8081/webhook", json=payload)
