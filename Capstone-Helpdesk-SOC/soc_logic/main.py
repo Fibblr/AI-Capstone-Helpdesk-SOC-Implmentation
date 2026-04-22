@@ -8,7 +8,7 @@ def mainsoc():
         with open("alert_simulation.json") as f: 
             alerts = json.load(f) 
     except Exception as e:
-        print("Alerts Failed to Load: {e}")   
+        print(f"Alerts Failed to Load: {e}")   
     for alert in alerts: 
         normalized = normalize(alert)
         ai_output = classify_auth_alert(normalized) 
