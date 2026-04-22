@@ -163,7 +163,7 @@ def employee_dashboard():
 
     with get_conn() as conn:
         tickets = conn.execute("SELECT * FROM tickets WHERE employee_id = ? ORDER BY id DESC",
-                               (session['user_id'],)).fetchall()
+         (session['user_id'],)).fetchall()
     return render_template('employee_dashboard.html', name=session['name'], tickets=tickets)
 
 
@@ -232,5 +232,5 @@ def receive_alert():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8081)
+    app.run(host="0.0.0.0", debug=True, port=8081)
 
