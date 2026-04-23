@@ -4,10 +4,16 @@ import json
 from datetime import datetime
 
 
+# try:
+#     from soc_logic.normalization import normalize
+#     from soc_logic.client import classify_auth_alert
+#     from soc_logic.severity import calculate_risk, map_severity
+
 try:
-    from soc_logic.normalization import normalize
-    from soc_logic.client import classify_auth_alert
-    from soc_logic.severity import calculate_risk, map_severity
+    from normalization import normalize
+    from client import classify_auth_alert
+    from severity import calculate_risk, map_severity
+
 
     AI_AVAILABLE = True
 except ImportError:
