@@ -4,15 +4,11 @@ import json
 from datetime import datetime
 
 
-# try:
-#     from soc_logic.normalization import normalize
-#     from soc_logic.client import classify_auth_alert
-#     from soc_logic.severity import calculate_risk, map_severity
-
 try:
-    from normalization import normalize
-    from client import classify_auth_alert
-    from severity import calculate_risk, map_severity
+    from soc_logic.normalization import normalize
+    from soc_logic.client import classify_auth_alert
+    from soc_logic.severity import calculate_risk, map_severity
+
 
 
     AI_AVAILABLE = True
@@ -169,7 +165,7 @@ def employee_dashboard():
 
     with get_conn() as conn:
         tickets = conn.execute("SELECT * FROM tickets WHERE employee_id = ? ORDER BY id DESC",
-         (session['user_id'],)).fetchall()
+        (session['user_id'],)).fetchall()
     return render_template('employee_dashboard.html', name=session['name'], tickets=tickets)
 
 
@@ -238,5 +234,5 @@ def receive_alert():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=8081)
+    app.run(host="172.18.76.212", debug=True, port=8081)
 

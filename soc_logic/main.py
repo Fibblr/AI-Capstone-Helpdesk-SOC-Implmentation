@@ -23,10 +23,20 @@ def main():
             try:
                 alert = json.loads(line)
 
-                # Filter by description
-                desc = alert.get("rule", {}).get("description", "").lower()
+                rule = alert.get("rule", {})
+                desc = rule.get("description", "").lower()
+                groups = [g.lower() for g in rule.get("groups", [])]
 
-                if "login" not in desc and "authentication" not in desc:
+                # Authentication filter
+                is_auth = (
+                    "authentication_failed" in groups or
+                    "sshd" in groups or
+                    "security" in groups or
+                    "authentication" in desc or
+                    "login" in desc
+                )
+
+                if not is_auth:
                     continue
 
                 res = requests.post(WEBHOOK, json=alert)
@@ -35,5 +45,5 @@ def main():
 
             except Exception as e:
                 print(f"Error: {e}")
-
+                
 main()
