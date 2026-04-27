@@ -237,5 +237,5 @@ def receive_alert():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=8081)
+    app.run(host="192.168.1.51", debug=True, port=8081)
 
