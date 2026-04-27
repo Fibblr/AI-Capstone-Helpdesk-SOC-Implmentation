@@ -21,7 +21,7 @@ EX: While in the main directory: "sudo nano COHERE_API_KEY=YOURAPIKEY"
 
 "DO THE FOLLOWING ON THE WAZUH VM AND THE FLASKSERVER VM"
 -If project is already present '"sudo rm -r xxx"'
--Make sure network adapters are set main is vmnet1(hostonly). The second is just NAT.
+-Make sure network adapters are set secondary is vmnet1(hostonly). The first adapter is just NAT.
     -Ubuntu IP: 192.168.1.50
     -Flask IP: 192.168.1.51
     -Windows IP: 192.168.1.49
