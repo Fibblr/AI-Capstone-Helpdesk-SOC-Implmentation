@@ -1,4 +1,5 @@
 import cohere
+import json
 import logging 
 from config import COHERE_API_KEY
 
@@ -37,7 +38,8 @@ def classify_auth_alert(alert):
             temperature=0
         )
         
-        return response.text.strip()
+        text = response.text.strip()
+        return json.loads(text)
     
     except Exception as e:
         ("Failed to recieve AI Feedback, Sending to manual review")

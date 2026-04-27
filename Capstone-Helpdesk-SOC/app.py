@@ -5,9 +5,10 @@ from datetime import datetime
 import os
 import sys
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 try:
+    import soc_logic
     from soc_logic.normalization import normalize
     from soc_logic.client import classify_auth_alert
     from soc_logic.severity import calculate_risk, map_severity
@@ -19,9 +20,7 @@ except ImportError:
     print("WARNING: soc_logic module not found. AI features will run in fallback mode.")
     AI_AVAILABLE = False
 
-DB_PATH = "helpdesk.db"
-
-
+DB_PATH = os.path.join(BASE_DIR, "helpdesk.db")
 def get_conn():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -194,17 +193,20 @@ def create_ticket():
 
 @app.route('/webhook', methods=['POST'])
 def receive_alert():
-    raw_data = request.json
+    raw_data = request.get_json(force=True, silent=True)
     if not raw_data:
         return jsonify({"error": "No payload"}), 400
 
     try:
+        print(f"Webhook received: {raw_data}")
         if AI_AVAILABLE:
             clean_data = normalize(raw_data)
             ai_response = classify_auth_alert(clean_data)
             try:
                 parsed_ai = json.loads(ai_response)
-            except:
+                if not isinstance(parsed_ai, dict):
+                    raise ValueError("Invalid AI response format")
+            except Exception:   
                 parsed_ai = {"classification": "Unknown", "confidence": 0} 
             
             classification = parsed_ai.get("classification", "Unknown")
