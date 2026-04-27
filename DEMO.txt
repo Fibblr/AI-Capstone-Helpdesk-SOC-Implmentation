@@ -1,0 +1,40 @@
+DOWNLOAD TEST VM LINK GOOGLEDRIVE -------> https://drive.google.com/file/d/1vE7FTi5vk4poR6kDU2EKhS_kWOsJjVrV/view?usp=drive_link *WINDOWS 11*
+
+https://drive.google.com/file/d/16nv--EiSX4_HCefz03qgZtdbNMoH9FI5/view?usp=sharing *LINUX*
+
+Windows 11 VM
+    Username:CIOS 
+    Password:P@ssw0rd
+
+Ubuntu Server (WAZUH) VM
+    Username:test 
+    Password:test
+
+Ubuntu Server (Flask) VM
+    Username: flask
+    Password: flask!
+
+Make sure you create an .env file.
+
+EX: While in the main directory: "sudo nano COHERE_API_KEY=YOURAPIKEY"
+
+
+"DO THE FOLLOWING ON THE WAZUH VM AND THE FLASKSERVER VM"
+-If project is already present '"sudo rm -r xxx"'
+-Make sure network adapters are set main is vmnet1(hostonly). The second is just NAT.
+    -Ubuntu IP: 192.168.1.50
+    -Flask IP: 192.168.1.51
+    -Windows IP: 192.168.1.49
+    -Default Gateway/DNS/Subnet Mask: 192.168.1.1, 1.1.1.1, 255.255.255.0
+    -Make sure all firewalls allow port 8081.
+
+1. sudo git clone https://github.com/Fibblr/AI-Capstone-Helpdesk-SOC-Implmentation/tree/main/Capstone-Helpdesk-SOC
+2. cd "AI-Capstone-Helpdesk-SOC-Implmentation"
+3. On FlaskServer VM "sudo python3 app.py"
+4. On Wazuh VM "sudo python3 main.py"
+-Ubuntu IP should be 192.168.1.50
+-Flask IP should be 192.168.1.51
+5. On Windows 11 VM go to a web browser and type 192.168.1.51:8081
+6. Login!!!!
+
+

@@ -2,7 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for, abort, ses
 import sqlite3
 import json
 from datetime import datetime
+import os
+import sys
 
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 try:
     from soc_logic.normalization import normalize
@@ -234,5 +237,5 @@ def receive_alert():
 
 
 if __name__ == "__main__":
-    app.run(host="172.18.76.215", debug=True, port=8081)
+    app.run(host="0.0.0.0", debug=True, port=8081)
 
