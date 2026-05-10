@@ -4,16 +4,31 @@ import json
 from datetime import datetime
 import os
 import sys
+import traceback
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Force Python to search project root
+if BASE_DIR not in sys.path:
+    sys.path.append(BASE_DIR)
+
+AI_AVAILABLE = False
+
 try:
-    import soc_logic
     from soc_logic.normalization import normalize
     from soc_logic.client import classify_auth_alert
     from soc_logic.severity import calculate_risk, map_severity
 
+    AI_AVAILABLE = True
+    print("SOC Logic Loaded Successfully")
 
+except Exception as e:
+    print("\n========== SOC LOGIC IMPORT ERROR ==========")
+    print(f"Error: {e}")
+    traceback.print_exc()
+    print("===========================================\n")
+
+    AI_AVAILABLE = False
 
     AI_AVAILABLE = True
 except ImportError:
