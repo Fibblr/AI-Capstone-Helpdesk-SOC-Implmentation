@@ -253,6 +253,4 @@ def receive_alert():
     return jsonify({"status": "Success", "ticket_id": ticket_id, "severity": severity}), 201
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port= 8081, debug=True)
-    print(request.host_url)
-
+    app.run(host="192.168.1.51", port= 8081, debug=True)
