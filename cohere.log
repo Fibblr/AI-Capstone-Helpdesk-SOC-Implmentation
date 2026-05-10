@@ -12,3 +12,5 @@ WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 345-177-258
 INFO:werkzeug: * Detected change in 'c:\\Users\\Cameron\\AI-Capstone-Helpdesk-SOC-Implmentation\\AI-Capstone-Helpdesk-SOC-Implmentation\\Capstone-Helpdesk-SOC\\app.py', reloading
 INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 345-177-258
