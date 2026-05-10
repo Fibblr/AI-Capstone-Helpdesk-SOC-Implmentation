@@ -21,7 +21,6 @@ try:
 
     AI_AVAILABLE = True
     print("SOC Logic Loaded Successfully")
-    print(request.url)
     
 except Exception as e:
     print("\n========== SOC LOGIC IMPORT ERROR ==========")
@@ -255,4 +254,5 @@ def receive_alert():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port= 8081, debug=True)
+    print(request.host_url)
 
