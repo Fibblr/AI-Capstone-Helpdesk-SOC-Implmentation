@@ -21,7 +21,8 @@ try:
 
     AI_AVAILABLE = True
     print("SOC Logic Loaded Successfully")
-
+    print(request.url)
+    
 except Exception as e:
     print("\n========== SOC LOGIC IMPORT ERROR ==========")
     print(f"Error: {e}")
@@ -252,7 +253,6 @@ def receive_alert():
 
     return jsonify({"status": "Success", "ticket_id": ticket_id, "severity": severity}), 201
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host="0.0.0.0", port= 8081, debug=True)
 
