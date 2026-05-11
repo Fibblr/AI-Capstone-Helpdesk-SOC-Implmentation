@@ -1,3 +1,5 @@
+import socket
+
 from flask import Flask, render_template, request, redirect, url_for, abort, session, jsonify
 import sqlite3
 import json
@@ -253,4 +255,17 @@ def receive_alert():
     return jsonify({"status": "Success", "ticket_id": ticket_id, "severity": severity}), 201
 
 if __name__ == "__main__":
-    app.run(host="192.168.1.51", port= 8081, debug=True)
+    host = "0.0.0.0"
+    port = 8081
+
+    # Get local network IP
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+
+    print("\n===================================")
+    print(f"Flask running on:")
+    print(f"Local:   http://127.0.0.1:{port}")
+    print(f"Network: http://{local_ip}:{port}")
+    print("===================================\n")
+
+    app.run(host=host, port=port, debug=True)

@@ -14,3 +14,11 @@ INFO:werkzeug: * Detected change in 'c:\\Users\\Cameron\\AI-Capstone-Helpdesk-SO
 INFO:werkzeug: * Restarting with stat
 WARNING:werkzeug: * Debugger is active!
 INFO:werkzeug: * Debugger PIN: 345-177-258
+INFO:werkzeug:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://10.0.0.89:8081
+INFO:werkzeug:[33mPress CTRL+C to quit[0m
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 345-177-258
